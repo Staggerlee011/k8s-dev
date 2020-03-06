@@ -1,23 +1,23 @@
-# use eksctl to create EKS cluster
+# Create cluster
 
-display available options and properties:
+Create a eks cluster based on a yaml file.
 
-```bash
-eksctl create cluster --help
-```
+    NOTE: linux academy allows in us-east-1 and us-west-2
+
+## create key for nodes
+
+First you will need a key to manage the nodes:
+
+    `aws ec2 create-key-pair --key-name eks-key`
 
 ## creation
 
-create cluster by using yaml config file:
+Second create cluster by using yaml config file:
 
-```bash
-eksctl create cluster -f eks-course.yaml
-```
+    `eksctl create cluster -f eks-cluster.yaml`
 
 ## post-install check
 
-eksctl also creates the config file for _kubectl_. This means we can immediately fire up a check like:
+Post install check that kubectl works
 
-```
-kubectl get nodes
-```
+    `kubectl get nodes`
