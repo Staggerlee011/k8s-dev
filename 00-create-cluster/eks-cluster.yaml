@@ -2,13 +2,13 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: EKS-test-cluster2
+  name: EKStestcluster1
   region: us-east-1
 
 nodeGroups:
-  - name: eks-dev-ng
+  - name: eksnodegroup
     instanceType: t3.medium
-    desiredCapacity: 5
+    desiredCapacity: 3
     ssh: # use existing EC2 key
       publicKeyName: eks-key
 

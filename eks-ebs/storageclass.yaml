@@ -1,0 +1,15 @@
+# https://kubernetes.io/docs/concepts/storage/storage-classes/#aws-ebs
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebsstorage
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  fsType: ext4
+  encrypted: "true"
+reclaimPolicy: Retain   # keep storage after pod dies
+allowVolumeExpansion: true  # allows for dynamic sizing after being created
+mountOptions:
+  - debug
+volumeBindingMode: Immediate
