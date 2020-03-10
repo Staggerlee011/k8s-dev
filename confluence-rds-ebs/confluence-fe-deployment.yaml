@@ -1,0 +1,52 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: confluence-fe-deployment
+  labels:
+    app: confluence
+spec:
+  selector:
+    matchLabels:
+      app: confluence
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+      - image: atlassian/confluence-server:6.14.1-alpine
+        name: confluence
+        env:
+        - name: ATL_TOMCAT_SCHEME
+          value: http
+        - name: ATL_JDBC_URL
+          value: jdbc:postgresql://postgres-rds.ciwojxiaorpt.us-east-1.rds.amazonaws.com:5432/confluence
+        - name: ATL_JDBC_USER
+          value: postgres
+        - name: ATL_JDBC_PASSWORD
+          value: mysecretpassword 
+        - name: ATL_DB_TYPE
+          value: postgres
+        ports:
+        - containerPort: 80
+          name: confluence
+        volumeMounts:
+          - mountPath: "/data/confluence-home"
+            name: confluence-ebs
+      volumes:
+        - name: confluence-ebs
+          persistentVolumeClaim:
+            claimName: confluence-storage
+#    livenessProbe:
+#      httpGet:
+#        path: /index.html
+#        port: 80
+#      initialDelaySeconds: 15
+#      timeoutSeconds: 10
+#      periodSeconds: 20
+#      failureThresold: 10
+#    readinessProbe:
+#      httpGet:
+#        Path: /index.html
+#        port: 80 
+#      initalDelaySeconds: 2
+#      periodSeconds: 5#

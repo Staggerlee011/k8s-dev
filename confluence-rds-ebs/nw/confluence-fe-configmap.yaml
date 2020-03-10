@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metdata:
+  name: confluence-fe-configmap
+  labels:
+    app:
+data:
+  ATL_PROXY_NAME = confluence.internal
+  ATL_PROXY_PORT = 80
+  ATL_TOMCAT_SCHEME = http
+  ATL_JDBC_URL = jdbc:postgresql://confluence-rds-service:5432/confluence
+  ATL_JDBC_USER = postgres
+  ATL_JDBC_PASSWORD = mysecretpassword
+  ATL_DB_TYPE = postgresql
