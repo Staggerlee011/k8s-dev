@@ -8,7 +8,7 @@ Create a eks cluster based on a yaml file.
 
 First you will need a key to manage the nodes:
 
-    `aws ec2 create-key-pair --key-name eks-key`
+    `aws ec2 create-key-pair --key-name eks-key --output text > eks-key.pem`
 
 ## creation
 
